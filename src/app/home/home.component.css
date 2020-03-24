@@ -1,0 +1,21 @@
+.container-fluid {
+    display: block;
+    height: 100%;
+}
+
+.main-row {
+    /* display: block; */
+    height: 100%;
+}
+
+.navbar-section {
+    /* display: block; */
+    height: 100%;
+}
+
+app-navbar {
+    display: block;
+    height: 100%;
+    margin: 0;
+
+}

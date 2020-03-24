@@ -1,0 +1,19 @@
+.img-section {
+    margin: 0 1rem;
+}
+
+.container {
+    text-align: center;
+}
+
+.card {
+    text-align: justify !important;
+}
+
+.page-title {
+    margin: 3rem 0;
+}
+
+.page-description {
+    margin: 3rem 0;
+}

@@ -1,0 +1,36 @@
+.service-img {
+    margin: 1rem 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.card {
+    text-align: justify !important;
+}
+
+.page-title {
+    margin: 1rem 0;
+}
+
+.page-description {
+    margin: 3rem 0;
+}
+
+.text-section {
+    width: 80%;
+}
+
+#text1,#text2 {
+    width:100%;
+    height: 8rem;
+}
+
+.form-row {
+    justify-content: center;
+}
+
+.service-img {
+    margin: 1rem 0;
+}

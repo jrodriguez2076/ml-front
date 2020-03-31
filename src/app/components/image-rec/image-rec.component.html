@@ -16,11 +16,11 @@
             gravida ac vel dui. </p>
     </div>
     <hr />
-    <form class="flex-column">
+    <form class="flex-column" [formGroup]="MLRequestForm" (ngSubmit)="onMLRequest()">
         <div class="row form-row">
             <div class="form-group text-section">
                 <label for="urlText">Enter image URL here for processing</label>
-                <input type="url" class="form-control" id="urlText" placeholder="URL goes here...">
+                <input type="url" class="form-control" id="urlText" placeholder="URL goes here..." formControlName="imageUrl">
             </div>
         </div>
         <!-- <div class="row form-row">
@@ -31,7 +31,7 @@
         </div> -->
         <div class="row form-row" style="display: flex; justify-content:center;">
             <button type="submit" class="btn btn-primary" style="margin: 0 3rem;">Process Image</button>
-            <button class="btn btn-secondary" style="margin: 0 3rem;"> Reset fields</button>
+            <button class="btn btn-secondary" style="margin: 0 3rem;" (click)="resetFields($event)"> Reset fields</button>
         </div>
     </form>
 </div>

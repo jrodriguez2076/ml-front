@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { LoginService } from './Services/login.service';
 import { HttpClientModule } from '@angular/common/http';
+import { PredictionService } from './Services/prediction.service';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     LoginService,
+    PredictionService
     ],
   bootstrap: [AppComponent]
 })

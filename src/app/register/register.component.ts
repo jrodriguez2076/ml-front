@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from '../Services/login.service';
-import { HttpClient } from '@angular/common/http';
 import { User } from '../models/User';
 import { ApiResponse } from '../models/DTO/ApiResponse';
 
@@ -9,7 +8,7 @@ import { ApiResponse } from '../models/DTO/ApiResponse';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  providers: [LoginService, HttpClient]
+  providers: [LoginService]
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
@@ -48,9 +47,4 @@ export class RegisterComponent implements OnInit {
   cancelRegister() {
     console.log("Now returning to login page")
   }
-
-  // validatePassword(password: string, repeat: string) {
-
-  // }
-
 }

@@ -4,12 +4,10 @@ import { BehaviorSubject } from 'rxjs';
 import { TokenResponse } from '../models/DTO/TokenResponse';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiResponse } from '../models/DTO/ApiResponse';
-
-
-
+import { ApiResult } from '../models/DTO/ApiResult';
 
 @Injectable()
-export class LoginService {
+export class PredictionService {
     private backendUrl = environment.backendUrl;
     public tokenData = new BehaviorSubject<TokenResponse>(null);
 
@@ -18,6 +16,7 @@ export class LoginService {
     ) { }
 
     textSimilarity( text1: string, text2: string  ){
+        console.log("fetching request from API")
         let body = {
             "text1": text1,
             "text2": text2
@@ -30,7 +29,7 @@ export class LoginService {
         } catch (error) {
             console.log('no token found')
         }
-        return this.http.post<ApiResponse>(this.backendUrl + '/services/text-similarity', body, { headers: headers });
+        return this.http.post<ApiResult>(this.backendUrl + '/services/text-similarity', body, { headers: headers });
     }
 
     entityRecognition( inputText: string) {
@@ -45,7 +44,7 @@ export class LoginService {
         } catch (error) {
             console.log('no token found')
         }
-        return this.http.post<ApiResponse>(this.backendUrl + '/services/ner', body, { headers: headers });
+        return this.http.post<ApiResult>(this.backendUrl + '/services/ner', body, { headers: headers });
     }
 
     imageRecognition( imageUrl: string) {
@@ -60,5 +59,5 @@ export class LoginService {
         } catch (error) {
             console.log('no token found')
         }
-        return this.http.post<ApiResponse>(this.backendUrl + '/services/image-classification', body, { headers: headers });    }
+        return this.http.post<ApiResult>(this.backendUrl + '/services/image-classification', body, { headers: headers });    }
 }

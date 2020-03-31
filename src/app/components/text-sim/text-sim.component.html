@@ -16,22 +16,22 @@
             gravida ac vel dui. </p>
     </div>
     <hr />
-    <form class="flex-column">
+    <form class="flex-column" (ngSubmit)="onMLRequest()" [formGroup]="MLRequestForm">
         <div class="row form-row">
-            <div class="form-group text-section">
+            <div class="form-group text-section" >
                 <label for="text1">Please enter Text 1 here</label>
-                <input type="textarea" class="form-control" id="text1" placeholder="First Text here...">
+                <input type="textarea" class="form-control" id="text1" placeholder="First Text here..." formControlName="text1">
             </div>
         </div>
         <div class="row form-row">
-            <div class="form-group text-section">
+            <div class="form-group text-section" >
                 <label for="text2">Please enter Text 2 here</label>
-                <input type="textarea" class="form-control" id="text2" placeholder="Second Text here...">
+                <input type="textarea" class="form-control" id="text2" placeholder="Second Text here..." formControlName="text2">
             </div>
         </div>
         <div class="row form-row" style="display: flex; justify-content:center;">
             <button type="submit" class="btn btn-primary" style="margin: 0 3rem;">Check Similarity</button>
-            <button class="btn btn-secondary" style="margin: 0 3rem;"> Reset fields</button>
+            <button class="btn btn-secondary" style="margin: 0 3rem;" (click)="resetFields($event)"> Reset fields</button>
         </div>
     </form>
 </div>

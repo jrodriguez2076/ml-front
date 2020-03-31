@@ -11,6 +11,9 @@ import { EntityRecComponent } from './components/entity-rec/entity-rec.component
 import { ImageRecComponent } from './components/image-rec/image-rec.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
+import { LoginService } from './Services/login.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,14 +26,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TextSimComponent,
     EntityRecComponent,
     ImageRecComponent,
-    ContactComponent
+    ContactComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

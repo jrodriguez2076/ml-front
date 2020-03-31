@@ -1,0 +1,38 @@
+<div class="container-fluid" style="align-self: flex-start;">
+    <div class=" login flex-column">
+        <div style="text-align: center; margin: 2rem auto; align-content: center;">
+            <img class="page-logo" src="../../assets/img/logo.png" alt="logo" style="max-width: 200px;">
+        </div>
+        <div class="card" style="width: 35%;">
+            <div class="card-header">
+                <h2>Register</h2>
+            </div>
+            <div class="card-body">
+                <form class="login-card" (ngSubmit)="onRegister()" [formGroup]="registerForm">
+                    <div class="form-group">
+                        <label for="text">Name</label>
+                        <input type="text" class="form-control" name="name" formControlName="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="text" class="form-control" name="email" formControlName="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" formControlName="password">
+                    </div>
+                    <div *ngIf="errorMessage"><p style="color: red;">Passwords do not match!</p></div>
+                    <div class="form-group">
+                        <label for="password">Repeat Password</label>
+                        <input type="password" class="form-control" name="passwordRepeat" formControlName="passwordRepeat">
+                    </div>
+                    <div *ngIf="errorMessage"><p style="color: red;">Passwords do not match!</p></div>
+                    <div>
+                        <span> <button class="btn btn-primary" type="submit" name="login">Register</button> </span>
+                        <span> <button class="btn btn-link" name="cancel" (click)="cancelRegister()">Cancel</button> </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

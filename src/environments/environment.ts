@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  backendUrl: '34.71.234.172:5001'
+  backendUrl: '34.71.234.172:5001',
+  predictionUrl: '34.71.234.172:5002'
 };
 
 /*

@@ -18,7 +18,8 @@ export class LoginService {
     login(email: string, password: string): Observable<TokenResponse> {
         const body = { username: email, password: password };
         const headers = new HttpHeaders().set('Content-Type', 'application/json');
-        return this.http.post<TokenResponse>(this.authenticationUrl + '/login', body, { headers: headers });
+        console.log(headers);
+        return this.http.post<TokenResponse>(this.authenticationUrl +  '/login', body, { headers: headers });
     }
 
     forgot() { }

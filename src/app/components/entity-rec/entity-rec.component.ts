@@ -13,6 +13,10 @@ export class EntityRecComponent implements OnInit {
   MLRequestForm: FormGroup;
   errorMessage: boolean;
   text: string;
+  foundResults: Boolean;
+  submittedRequest: Boolean;
+  predictionResult: ApiResult;
+
 
   constructor(
     private predictionService: PredictionService,
@@ -32,15 +36,24 @@ export class EntityRecComponent implements OnInit {
       return
     }
     console.log("passed validation")
-    this.predictionService.entityRecognition(this.MLRequestForm.value.text).subscribe(
-      (res: ApiResult) => {
-        console.log(ApiResult);
-      }
-    );
+    this.submittedRequest = true;
+    this.predictionResult = this.predictionService.entityRecognition(this.MLRequestForm.value.text);
+    this.foundResults = true;
+    // this.predictionService.entityRecognition(this.MLRequestForm.value.text).subscribe(
+    //   (res: ApiResult) => {
+    //     console.log(ApiResult);
+    //   }
+    // );
   }
 
   resetFields(event) {
     event.preventDefault();
+    this.MLRequestForm.reset();
+  }
+
+  restartForm() {
+    event.preventDefault();
+    this.submittedRequest = false;
     this.MLRequestForm.reset();
   }
 

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { LoginService } from '../Services/login.service';
-import { User } from '../models/User';
-import { ApiResponse } from '../models/DTO/ApiResponse';
+import { LoginService } from '../../Services/login.service';
+import { User } from '../../models/User';
+import { ApiResponse } from '../../models/DTO/ApiResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
+    private router: Router
   ) {
     this.registerForm = new FormGroup({
       'email': new FormControl(this.email, [Validators.required]),
@@ -40,6 +42,7 @@ export class RegisterComponent implements OnInit {
     this.loginService.register(this.registerForm.value).subscribe(
       (res: ApiResponse) => {
         console.log("redirecting to Login Page...")
+        this.router.navigate(["/login"])
       }
     );
   }

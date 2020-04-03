@@ -12,9 +12,12 @@ import { ApiResult } from 'src/app/models/DTO/ApiResult';
 export class TextSimComponent implements OnInit {
   Title: string = 'Text Similarity';
   MLRequestForm: FormGroup;
-  errorMessage: boolean;
+  errorMessage: Boolean;
   text1: string;
   text2: string;
+  foundResults: Boolean;
+  submittedRequest: Boolean;
+  predictionResult: ApiResult;
 
   constructor(
     private predictionService: PredictionService,
@@ -35,15 +38,26 @@ export class TextSimComponent implements OnInit {
       return
     }
     console.log("passed validation")
-    this.predictionService.textSimilarity(this.MLRequestForm.value.text1, this.MLRequestForm.value.text2).subscribe(
-      (res: ApiResult) => {
-        console.log(ApiResult);
-      }
-    );
+    this.submittedRequest = true;
+    this.predictionResult = this.predictionService.textSimilarity(this.MLRequestForm.value.text1, this.MLRequestForm.value.text2);
+    this.foundResults = true;
+    
+    // .subscribe(
+    //   (res: ApiResult) => {
+    //     // this.submittedRequest = true;
+    //     console.log(ApiResult);
+    //   }
+    // );
   }
 
   resetFields(event) {
     event.preventDefault();
+    this.MLRequestForm.reset();
+  }
+
+  restartForm() {
+    event.preventDefault();
+    this.submittedRequest = false;
     this.MLRequestForm.reset();
   }
 }

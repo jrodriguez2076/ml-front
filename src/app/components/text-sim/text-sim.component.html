@@ -1,37 +1,65 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6 offset-3">
-            <img src="../../assets/img/Similarity.png" class="service-img" alt="simil" style="max-width: 180px;">
-            <h1 class="page-title">{{Title}}</h1>
+            <img src="../../assets/img/Similarity.png" class="service-img" alt="simil" style="max-width: 130px;">
+            <h2 class="page-title">{{Title}}</h2>
         </div>
     </div>
     <hr />
     <div class="row">
-        <p class="page-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin enim ligula,hendrerit
-            vitae elit et, congue rutrum risus. Aenean viverra luctus felis, non posuere risus auctor nec. Aenean
-            sagittis
-            urna in augue ullamcorper sodales. Aenean metus nibh, rutrum in lectus et, molestie dictum diam. Suspendisse
-            malesuada ligula sit amet urna tempor, id scelerisque nulla sollicitudin. Curabitur ut orci eget orci
-            rhoncus
-            gravida ac vel dui. </p>
+        <p class="page-description">Find out how similar two texts of your choice are. Please add them below to get started</p>
     </div>
     <hr />
-    <form class="flex-column" (ngSubmit)="onMLRequest()" [formGroup]="MLRequestForm">
+    <form class="flex-column" (ngSubmit)="onMLRequest()" [formGroup]="MLRequestForm" *ngIf="!submittedRequest">
         <div class="row form-row">
-            <div class="form-group text-section" >
+            <div class="form-group text-section">
                 <label for="text1">Please enter Text 1 here</label>
-                <input type="textarea" class="form-control" id="text1" placeholder="First Text here..." formControlName="text1">
+                <input type="textarea" class="form-control" id="text1" placeholder="First Text here..."
+                    formControlName="text1">
             </div>
         </div>
+        <div *ngIf="errorMessage">
+            <p style="color: red;">both text fields must be populated</p>
+        </div>
         <div class="row form-row">
-            <div class="form-group text-section" >
+            <div class="form-group text-section">
                 <label for="text2">Please enter Text 2 here</label>
-                <input type="textarea" class="form-control" id="text2" placeholder="Second Text here..." formControlName="text2">
+                <input type="textarea" class="form-control" id="text2" placeholder="Second Text here..."
+                    formControlName="text2">
             </div>
+        </div>
+        <div *ngIf="errorMessage">
+            <p style="color: red;">both text fields must be populated</p>
         </div>
         <div class="row form-row" style="display: flex; justify-content:center;">
             <button type="submit" class="btn btn-primary" style="margin: 0 3rem;">Check Similarity</button>
-            <button class="btn btn-secondary" style="margin: 0 3rem;" (click)="resetFields($event)"> Reset fields</button>
+            <button class="btn btn-secondary" style="margin: 0 3rem;" (click)="resetFields($event)"> Reset
+                fields</button>
         </div>
     </form>
+    <div class="row">
+        <div *ngIf="submittedRequest" class="page-description" style="text-align: center; width: 100%;">
+            <div *ngIf="foundResults; else api_error">
+                <div class="form-row ">
+                    <div class="card text-center text-section">
+                        <div style="text-align: center;">
+                            <img class="card-img-top" src="../../assets/img/success.png" alt="Card image cap"
+                                style="width: 10rem;">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title" style="text-align: center;">Finished!</h4>
+                            <p class="card-text" style="text-align: center;"> Similarity: {{predictionResult.result}}
+                            </p>
+                            <div style="text-align: center;">
+                                <a href="#" class="btn btn-primary" (click)="restartForm()"
+                                    >Go back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #api_error style="color: red;"> There was an error getting the results. Please try again later.
+            </ng-template>
+        </div>
+    </div>
 </div>

@@ -30,3 +30,11 @@ ul {
 .page-logo {
     max-height: 100px;
 }
+
+.sidebar-wrapper {
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: all 0.4s ease 0s;
+}

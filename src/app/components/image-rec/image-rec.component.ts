@@ -15,6 +15,10 @@ export class ImageRecComponent implements OnInit {
   MLRequestForm: FormGroup;
   errorMessage: boolean;
   imageUrl: string;
+  foundResults: Boolean;
+  submittedRequest: Boolean;
+  predictionResult: ApiResult;
+
 
   constructor(
     private predictionService: PredictionService,
@@ -34,11 +38,14 @@ export class ImageRecComponent implements OnInit {
       return
     }
     console.log("passed validation")
-    this.predictionService.entityRecognition(this.MLRequestForm.value.imageUrl).subscribe(
-      (res: ApiResult) => {
-        console.log(ApiResult);
-      }
-    );
+    this.submittedRequest = true;
+    this.predictionResult = this.predictionService.imageRecognition(this.MLRequestForm.value.imageUrl);
+    this.foundResults = true;
+    // this.predictionService.entityRecognition(this.MLRequestForm.value.imageUrl).subscribe(
+    //   (res: ApiResult) => {
+    //     console.log(ApiResult);
+    //   }
+    // );
   }
 
   resetFields(event) {
@@ -46,5 +53,9 @@ export class ImageRecComponent implements OnInit {
     this.MLRequestForm.reset();
   }
 
-
+  restartForm() {
+    event.preventDefault();
+    this.submittedRequest = false;
+    this.MLRequestForm.reset();
+  }
 }

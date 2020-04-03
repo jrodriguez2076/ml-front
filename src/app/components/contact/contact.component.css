@@ -1,5 +1,9 @@
 .img-section {
     margin: 0 1rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .container {
@@ -11,9 +15,16 @@
 }
 
 .page-title {
-    margin: 2rem 0;
+    margin: 1rem 0;
 }
 
 .page-description {
+    width: 100%;
+    text-align: center;
     margin: 2rem 0;
+}
+
+.avatar {
+    max-width: 100px;
+    max-height: 100px;
 }

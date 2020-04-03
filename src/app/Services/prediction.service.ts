@@ -25,11 +25,16 @@ export class PredictionService {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         try {
             let accessToken = window.localStorage.getItem("access-token");
-            headers.append('Authorization', 'Bearer '+ accessToken)    
+            headers = headers.append('Authorization', 'Bearer '+ accessToken)    
         } catch (error) {
             console.log('no token found')
         }
-        return this.http.post<ApiResult>(this.backendUrl + '/services/text-similarity', body, { headers: headers });
+        let result = {
+            "status": "done",
+            "result": 0.95
+        }
+        return result;
+        //  this.http.post<ApiResult>(this.backendUrl + '/services/text-similarity', body, { headers: headers });
     }
 
     entityRecognition( inputText: string) {
@@ -40,11 +45,18 @@ export class PredictionService {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         try {
             let accessToken = window.localStorage.getItem("access-token");
-            headers.append('Authorization', 'Bearer '+ accessToken)    
+            headers = headers.append('Authorization', 'Bearer '+ accessToken)    
         } catch (error) {
             console.log('no token found')
         }
-        return this.http.post<ApiResult>(this.backendUrl + '/services/ner', body, { headers: headers });
+        let result = {
+            "status": "done",
+            "result": "Location, Time, Date"
+        }
+        console.log("Returning result")
+        return result;
+
+        // return this.http.post<ApiResult>(this.backendUrl + '/services/ner', body, { headers: headers });
     }
 
     imageRecognition( imageUrl: string) {
@@ -55,9 +67,16 @@ export class PredictionService {
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         try {
             let accessToken = window.localStorage.getItem("access-token");
-            headers.append('Authorization', 'Bearer '+ accessToken)    
+            headers = headers.append('Authorization', 'Bearer '+ accessToken)    
         } catch (error) {
             console.log('no token found')
         }
-        return this.http.post<ApiResult>(this.backendUrl + '/services/image-classification', body, { headers: headers });    }
+        let result = {
+            "status": "done",
+            "result": "Maracucho"
+        }
+        console.log("returning Result")
+        return result;
+        // return this.http.post<ApiResult>(this.backendUrl + '/services/image-classification', body, { headers: headers });   
+    }
 }

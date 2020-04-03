@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from "@angular/router";
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -11,12 +12,25 @@ import { EntityRecComponent } from './components/entity-rec/entity-rec.component
 import { ImageRecComponent } from './components/image-rec/image-rec.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './components/register/register.component';
 import { LoginService } from './Services/login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PredictionService } from './Services/prediction.service';
 
+const appRoutes: Routes = [
+  {
+    path: '', component: HomeComponent, children: [
+      { path: '', component: WelcomeComponent },
+      { path: 'text-similarity', component: TextSimComponent },
+      { path: 'entity-recognition', component: EntityRecComponent },
+      { path: 'image-recognition', component: ImageRecComponent },
+      { path: 'contact', component: ContactComponent },
+    ]
+  },
+  { path: 'login', component: LoginComponent },
 
+  { path: 'register', component: RegisterComponent },
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,12 +48,13 @@ import { PredictionService } from './Services/prediction.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     LoginService,
     PredictionService
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,7 +15,11 @@
 }
 
 .page-description {
-    margin: 3rem 0;
+    margin: 2rem 0;
+    text-align: center;
+    width: 100%;
+
+
 }
 
 .text-section {

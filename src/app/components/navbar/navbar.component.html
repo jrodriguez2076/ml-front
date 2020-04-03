@@ -1,27 +1,31 @@
-<nav class="navbar navbar-expand-lg flex-column" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="#"><img class="page-logo" src="../../assets/img/logo.png" alt="logo"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<div class="sidebar-wrapper">
+    <nav class="navbar navbar-expand-lg flex-column" style="background-color: #e3f2fd; min-height: 100%;">
+        <a class="navbar-brand" href="#"><img class="page-logo" src="../../assets/img/logo.png" alt="logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto flex-column">
-            <li class="nav-item active navigation">
-                <a class="nav-link waves-light " mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item navigation">
-                <a class="nav-link waves-light " mdbWavesEffect>Text Similarity</a>
-            </li>
-            <li class="nav-item navigation">
-                <a class="nav-link waves-light " mdbWavesEffect>Entity Recognition</a>
-            </li>
-            <li class="nav-item navigation">
-                <a class="nav-link waves-light " mdbWavesEffect>Image Recognition</a>
-            </li>
-            <li class="nav-item contact">
-                <a class="nav-link waves-light " mdbWavesEffect>Contact Us!</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto flex-column">
+                <li class="nav-item navigation" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">
+                    <a class="nav-link waves-light " mdbWavesEffect routerLink="/">Home</a>
+                </li>
+                <li class="nav-item navigation" routerLinkActive="active">
+                    <a class="nav-link waves-light " mdbWavesEffect routerLink="/text-similarity">Text Similarity</a>
+                </li>
+                <li class="nav-item navigation" routerLinkActive="active">
+                    <a class="nav-link waves-light " mdbWavesEffect routerLink="/entity-recognition">Entity
+                        Recognition</a>
+                </li>
+                <li class="nav-item navigation" routerLinkActive="active">
+                    <a class="nav-link waves-light " mdbWavesEffect routerLink="/image-recognition">Image
+                        Recognition</a>
+                </li>
+                <li class="nav-item contact" routerLinkActive="active">
+                    <a class="nav-link waves-light " mdbWavesEffect routerLink="/contact">Contact Us!</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

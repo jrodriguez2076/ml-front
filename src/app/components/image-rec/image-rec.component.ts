@@ -16,8 +16,10 @@ export class ImageRecComponent implements OnInit {
   errorMessage: boolean;
   imageUrl: string;
   foundResults: Boolean;
-  submittedRequest: Boolean;
-  predictionResult: ApiResult;
+  // submittedRequest: Boolean;
+  completedRequest: Boolean = false;
+  loading: Boolean = false;
+  predictionResult: ApiResult = { status: "200", result: [] };
 
 
   constructor(
@@ -38,9 +40,30 @@ export class ImageRecComponent implements OnInit {
       return
     }
     console.log("passed validation")
-    this.submittedRequest = true;
-    this.predictionResult = this.predictionService.imageRecognition(this.MLRequestForm.value.imageUrl);
-    this.foundResults = true;
+    this.loading = true;
+    this.predictionService.imageRecognition(this.MLRequestForm.value.imageUrl).subscribe(
+      (res: any) => {
+        console.log(res);
+        // if (res.status <400) {
+        this.completedRequest = true;
+        this.loading = false;
+        this.foundResults = true;
+        let predictKeys = Object.keys(res.Prediction);
+        console.log(predictKeys);
+        let predictScores = []
+        predictKeys.forEach((value,index) => {
+          console.log(value)
+          this.predictionResult.result.push({name: value, score: res.Prediction[value]})
+          // predictScores.push(res.Prediction[value]);
+
+        })
+        console.log(this.predictionResult.result)
+        // this.predictionResult.result = res.Prediction;
+        // }
+      }
+    );
+    // this.predictionResult = this.predictionService.imageRecognition(this.MLRequestForm.value.imageUrl);
+    // this.foundResults = true;
     // this.predictionService.entityRecognition(this.MLRequestForm.value.imageUrl).subscribe(
     //   (res: ApiResult) => {
     //     console.log(ApiResult);
@@ -55,7 +78,8 @@ export class ImageRecComponent implements OnInit {
 
   restartForm() {
     event.preventDefault();
-    this.submittedRequest = false;
+    this.completedRequest = false;
+    this.loading = false;
     this.MLRequestForm.reset();
   }
 }

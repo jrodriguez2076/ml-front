@@ -10,7 +10,7 @@
         <p class="page-description">Find out how similar two texts of your choice are. Please add them below to get started</p>
     </div>
     <hr />
-    <form class="flex-column" (ngSubmit)="onMLRequest()" [formGroup]="MLRequestForm" *ngIf="!submittedRequest">
+    <form class="flex-column" (ngSubmit)="onMLRequest()" [formGroup]="MLRequestForm" *ngIf="!loading && !completedRequest">
         <div class="row form-row">
             <div class="form-group text-section">
                 <label for="text1">Please enter Text 1 here</label>
@@ -38,7 +38,11 @@
         </div>
     </form>
     <div class="row">
-        <div *ngIf="submittedRequest" class="page-description" style="text-align: center; width: 100%;">
+        <div *ngIf="loading" class="page-description" style="text-align: center; width: 100%;">
+            <img src="../../../assets/img/loading_spinner.gif" alt="loading" style="max-width: 10rem;">
+            <p>Getting results... Please wait</p>
+        </div>
+        <div *ngIf="completedRequest" class="page-description" style="text-align: center; width: 100%;">
             <div *ngIf="foundResults; else api_error">
                 <div class="form-row ">
                     <div class="card text-center text-section">

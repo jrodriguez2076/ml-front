@@ -16,8 +16,10 @@ export class TextSimComponent implements OnInit {
   text1: string;
   text2: string;
   foundResults: Boolean;
-  submittedRequest: Boolean;
-  predictionResult: ApiResult;
+  // submittedRequest: Boolean;
+  completedRequest: Boolean = false;
+  loading: Boolean= false;
+  predictionResult: ApiResult = {status:"200", result:""};
 
   constructor(
     private predictionService: PredictionService,
@@ -38,16 +40,19 @@ export class TextSimComponent implements OnInit {
       return
     }
     console.log("passed validation")
-    this.submittedRequest = true;
-    this.predictionResult = this.predictionService.textSimilarity(this.MLRequestForm.value.text1, this.MLRequestForm.value.text2);
-    this.foundResults = true;
+    this.loading = true;
+    this.predictionService.textSimilarity(this.MLRequestForm.value.text1, this.MLRequestForm.value.text2).subscribe(
+      (res: any) => {
+        console.log(res);
+        // if (res.status <400) {
+        this.completedRequest = true;
+        this.loading=false;
+        this.foundResults = true;
+        this.predictionResult.result = res.ratio;
+        // }
+      }
+    );
     
-    // .subscribe(
-    //   (res: ApiResult) => {
-    //     // this.submittedRequest = true;
-    //     console.log(ApiResult);
-    //   }
-    // );
   }
 
   resetFields(event) {
@@ -57,7 +62,8 @@ export class TextSimComponent implements OnInit {
 
   restartForm() {
     event.preventDefault();
-    this.submittedRequest = false;
+    this.completedRequest = false;
+    this.loading = false;
     this.MLRequestForm.reset();
   }
 }

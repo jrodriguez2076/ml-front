@@ -1,11 +1,6 @@
 {
-    "**": {
+    "/api": {
         "target": "http://34.71.234.172:5001",
-        "secure": false,
-        "changeOrigin": true,
-        "pathRewrite": {
-            "^/": "/"
-        },
-        "logLevel": "debug"
+        "secure": false
     }
 }

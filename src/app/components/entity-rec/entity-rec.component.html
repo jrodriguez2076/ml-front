@@ -11,7 +11,7 @@
         <p class="page-description">Identify entities from a text of your choice. Add text below to get started. </p>
     </div>
     <hr />
-    <form class="flex-column" [formGroup]="MLRequestForm" (ngSubmit)="onMLRequest()" *ngIf="!submittedRequest">
+    <form class="flex-column" [formGroup]="MLRequestForm" (ngSubmit)="onMLRequest()" *ngIf="!loading && !completedRequest">
         <div class="row form-row">
             <div class="form-group text-section">
                 <label for="text1">Enter text here for extraction</label>
@@ -26,6 +26,53 @@
         </div>
     </form>
     <div class="row">
+        <div *ngIf="loading" class="page-description" style="text-align: center; width: 100%;">
+            <img src="../../../assets/img/loading_spinner.gif" alt="loading" style="max-width: 10rem;">
+            <p>Getting results... Please wait</p>
+        </div>
+        <div *ngIf="completedRequest" class="page-description" style="text-align: center; width: 100%;">
+            <div *ngIf="foundResults; else api_error">
+                <div class="form-row ">
+                    <div class="card text-center text-section">
+                        <div style="text-align: center;">
+                            <img class="card-img-top" src="../../assets/img/success.png" alt="Card image cap"
+                                style="width: 10rem;">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title" style="text-align: center;">Finished!</h4>
+                            <p class="card-text" style="text-align: center; display: flex; justify-content: center;"> entities found:
+                            </p>
+                            <div style="text-align: center;">
+                                <table class="table">
+                                    <thead>
+                                        <th>Name</th>
+                                        <th>Text</th>
+                                        <th>Start index</th>
+                                        <th>End index</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let entity of predictionResult.result">
+                                            <td>{{entity.entityName}}</td>
+                                            <td>{{entity.entText}}</td>
+                                            <td>{{entity.startIndex}}</td>
+                                            <td>{{entity.endIndex}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="text-align: center;">
+                                <a href="#" class="btn btn-primary" (click)="restartForm()"
+                                    >Go back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #api_error style="color: red;"> There was an error getting the results. Please try again later.
+            </ng-template>
+        </div>
+    </div>
+    <!-- <div class="row">
         <div *ngIf="submittedRequest" class="page-description" style="text-align: center; width: 100%;">
             <div *ngIf="foundResults; else api_error">
                 <div class="form-row ">
@@ -48,5 +95,5 @@
             <ng-template #api_error style="color: red;"> There was an error getting the results. Please try again later.
             </ng-template>
         </div>
-    </div>
+    </div> -->
 </div>

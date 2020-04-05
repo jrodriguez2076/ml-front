@@ -10,7 +10,7 @@
         <p class="page-description">Analyze images to identify objects and more. Add an URL below and start analysis </p>
     </div>
     <hr />
-    <form class="flex-column" [formGroup]="MLRequestForm" (ngSubmit)="onMLRequest()" *ngIf="!submittedRequest">
+    <form class="flex-column" [formGroup]="MLRequestForm" (ngSubmit)="onMLRequest()" *ngIf="!loading && !completedRequest">
         <div class="row form-row">
             <div class="form-group text-section">
                 <label for="urlText">Enter image URL here for processing</label>
@@ -25,7 +25,11 @@
         </div>
     </form>
     <div class="row">
-        <div *ngIf="submittedRequest" class="page-description" style="text-align: center; width: 100%;">
+        <div *ngIf="loading" class="page-description" style="text-align: center; width: 100%;">
+            <img src="../../../assets/img/loading_spinner.gif" alt="loading" style="max-width: 10rem;">
+            <p>Getting results... Please wait</p>
+        </div>
+        <div *ngIf="completedRequest" class="page-description" style="text-align: center; width: 100%;">
             <div *ngIf="foundResults; else api_error">
                 <div class="form-row ">
                     <div class="card text-center text-section">
@@ -35,11 +39,25 @@
                         </div>
                         <div class="card-body">
                             <h4 class="card-title" style="text-align: center;">Finished!</h4>
-                            <p class="card-text" style="text-align: center;"> Recognized:
-                                {{predictionResult.result}}
+                            <p class="card-text" style="text-align: center;"> objects Found:
                             </p>
                             <div style="text-align: center;">
-                                <a href="#" class="btn btn-primary" (click)="restartForm()">Go back</a>
+                                <table class="table">
+                                    <thead>
+                                        <th>Prediction</th>
+                                        <th>score</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let prediction of predictionResult.result">
+                                            <td>{{prediction.name}}</td>
+                                            <td>{{prediction.score}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="text-align: center;">
+                                <a href="#" class="btn btn-primary" (click)="restartForm()"
+                                    >Go back</a>
                             </div>
                         </div>
                     </div>

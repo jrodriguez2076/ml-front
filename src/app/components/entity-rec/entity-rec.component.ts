@@ -14,8 +14,10 @@ export class EntityRecComponent implements OnInit {
   errorMessage: boolean;
   text: string;
   foundResults: Boolean;
-  submittedRequest: Boolean;
-  predictionResult: ApiResult;
+  // submittedRequest: Boolean;
+  completedRequest: Boolean = false;
+  loading: Boolean= false;
+  predictionResult: ApiResult = {status:"200", result:""};
 
 
   constructor(
@@ -36,9 +38,21 @@ export class EntityRecComponent implements OnInit {
       return
     }
     console.log("passed validation")
-    this.submittedRequest = true;
-    this.predictionResult = this.predictionService.entityRecognition(this.MLRequestForm.value.text);
+    this.loading = true;
+    // this.predictionResult = this.predictionService.entityRecognition(this.MLRequestForm.value.text);
     this.foundResults = true;
+    this.predictionService.entityRecognition(this.MLRequestForm.value.text).subscribe(
+      (res: any) => {
+        console.log(res);
+        // if (res.status <400) {
+        this.completedRequest = true;
+        this.loading=false;
+        this.foundResults = true;
+        console.log(Object.keys(res));
+        this.predictionResult.result = res["Entities Found"];
+        // }
+      }
+    );
     // this.predictionService.entityRecognition(this.MLRequestForm.value.text).subscribe(
     //   (res: ApiResult) => {
     //     console.log(ApiResult);
@@ -53,7 +67,8 @@ export class EntityRecComponent implements OnInit {
 
   restartForm() {
     event.preventDefault();
-    this.submittedRequest = false;
+    this.completedRequest = false;
+    this.loading = false;
     this.MLRequestForm.reset();
   }
 

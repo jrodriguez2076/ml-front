@@ -22,19 +22,30 @@ export class PredictionService {
             "text2": text2
         }
         
-        let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        try {
-            let accessToken = window.localStorage.getItem("access-token");
-            headers = headers.append('Authorization', 'Bearer '+ accessToken)    
-        } catch (error) {
-            console.log('no token found')
+        let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODYwMzQ2NzgsIm5iZiI6MTU4NjAzNDY3OCwianRpIjoiMjU4ODhmZmMtMTQ2NC00Y2Q2LTgyMjYtOTBmNWQ3ZDRhM2MzIiwiZXhwIjoxNTg2MTIxMDc4LCJpZGVudGl0eSI6Impvc2VyIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.Y3qlLpzPBj7oLJq5gl8BfPQYN9NP-qZoLxUt25J164A"
+
+        let headersDict ={
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}` ,
+            // 'Access-Control-Allow-Origin': '*',
         }
+        
+        // let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        let headers = new HttpHeaders(headersDict);
+        // try {
+        //     // let accessToken = window.localStorage.getItem("access-token");
+            
+        //     headers = headers.append('Authorization', 'Bearer '+ accessToken) 
+        //     console.log(headers);
+        // } catch (error) {
+        //     console.log('no token found')
+        // }
         let result = {
             "status": "done",
             "result": 0.95
         }
-        return result;
-        //  this.http.post<ApiResult>(this.backendUrl + '/services/text-similarity', body, { headers: headers });
+        // return result;
+        return this.http.post<any>(this.backendUrl + '/api/services/text-similarity', body, { headers: headers });
     }
 
     entityRecognition( inputText: string) {
@@ -42,20 +53,24 @@ export class PredictionService {
             "text": inputText,
         }
         
-        let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        try {
-            let accessToken = window.localStorage.getItem("access-token");
-            headers = headers.append('Authorization', 'Bearer '+ accessToken)    
-        } catch (error) {
-            console.log('no token found')
+        let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODYwMzQ2NzgsIm5iZiI6MTU4NjAzNDY3OCwianRpIjoiMjU4ODhmZmMtMTQ2NC00Y2Q2LTgyMjYtOTBmNWQ3ZDRhM2MzIiwiZXhwIjoxNTg2MTIxMDc4LCJpZGVudGl0eSI6Impvc2VyIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.Y3qlLpzPBj7oLJq5gl8BfPQYN9NP-qZoLxUt25J164A"
+
+        let headersDict ={
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}` ,
         }
+        
+        // let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        let headers = new HttpHeaders(headersDict);
+
         let result = {
             "status": "done",
             "result": "Location, Time, Date"
         }
-        console.log("Returning result")
-        return result;
 
+        console.log("Returning result")
+        // return result;
+        return this.http.post<any>(this.backendUrl + '/api/services/ner', body, { headers: headers });
         // return this.http.post<ApiResult>(this.backendUrl + '/services/ner', body, { headers: headers });
     }
 
@@ -63,20 +78,28 @@ export class PredictionService {
         let body = {
             "url": imageUrl,
         }
+        console.log("GETTING IMAGE")
+        let accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODYwMzQ2NzgsIm5iZiI6MTU4NjAzNDY3OCwianRpIjoiMjU4ODhmZmMtMTQ2NC00Y2Q2LTgyMjYtOTBmNWQ3ZDRhM2MzIiwiZXhwIjoxNTg2MTIxMDc4LCJpZGVudGl0eSI6Impvc2VyIiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.Y3qlLpzPBj7oLJq5gl8BfPQYN9NP-qZoLxUt25J164A"
+
+        let headersDict ={
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}` ,
+        }
         
-        let headers = new HttpHeaders().set('Content-Type', 'application/json');
-        try {
-            let accessToken = window.localStorage.getItem("access-token");
-            headers = headers.append('Authorization', 'Bearer '+ accessToken)    
-        } catch (error) {
-            console.log('no token found')
-        }
-        let result = {
-            "status": "done",
-            "result": "Maracucho"
-        }
-        console.log("returning Result")
-        return result;
-        // return this.http.post<ApiResult>(this.backendUrl + '/services/image-classification', body, { headers: headers });   
+        let headers = new HttpHeaders(headersDict);
+        // let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        // try {
+        //     let accessToken = window.localStorage.getItem("access-token");
+        //     headers = headers.append('Authorization', 'Bearer '+ accessToken)    
+        // } catch (error) {
+        //     console.log('no token found')
+        // }
+        // let result = {
+        //     "status": "done",
+        //     "result": "Maracucho"
+        // }
+        console.log(this.backendUrl + 'api/services/image-classification')
+        // return result;s
+        return this.http.post<any>(this.backendUrl + '/api/services/image-classification', body, { headers: headers });   
     }
 }

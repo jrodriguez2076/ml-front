@@ -1,12 +1,14 @@
 <div class="sidebar-wrapper">
     <nav class="navbar navbar-expand-lg flex-column" style="background-color: #e3f2fd; min-height: 100%;">
-        <a class="navbar-brand" href="#"><img class="page-logo" src="../../assets/img/logo.png" alt="logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="#">
+            <img class="page-logo navbar-brand" src="../../assets/img/logo.png" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
             <span class="navbar-toggler-icon"></span>
         </button>
+        
 
-        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <div class="collapse navbar-collapse " id="navbarSupportedContent" [ngbCollapse]="isCollapsed">
             <ul class="navbar-nav mr-auto flex-column">
                 <li class="nav-item navigation" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">
                     <a class="nav-link waves-light " mdbWavesEffect routerLink="/">Home</a>

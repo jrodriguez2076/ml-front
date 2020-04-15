@@ -39,15 +39,15 @@ export class RegisterComponent implements OnInit {
       this.errorMessage = true;
       return
     }
-    this.loginService.register(this.registerForm.value).subscribe(
-      (res: ApiResponse) => {
-        console.log("redirecting to Login Page...")
-        this.router.navigate(["/login"])
-      }
-    );
+    this.router.navigate(["/api-message"])
+
+    // this.loginService.register(this.registerForm.value).subscribe(
+    //   (res: ApiResponse) => {
+        
+    //   }
+    // );
   }
 
   cancelRegister() {
-    console.log("Now returning to login page")
   }
 }

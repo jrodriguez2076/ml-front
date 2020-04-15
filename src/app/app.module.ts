@@ -17,6 +17,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginService } from './Services/login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PredictionService } from './Services/prediction.service';
+import { ApikeyComponent } from './apikey/apikey.component';
 
 const appRoutes: Routes = [
   {
@@ -25,12 +26,16 @@ const appRoutes: Routes = [
       { path: 'text-similarity', component: TextSimComponent },
       { path: 'entity-recognition', component: EntityRecComponent },
       { path: 'image-recognition', component: ImageRecComponent },
+      { path: 'get-api-key', component: RegisterComponent },
       { path: 'contact', component: ContactComponent },
+      {path: 'api-message', component: ApikeyComponent},
     ]
   },
-  { path: 'login', component: LoginComponent },
+  // { path: 'login', component: LoginComponent },
 
-  { path: 'register', component: RegisterComponent },
+  // { path: 'register', component: RegisterComponent },
+
+  
 ];
 @NgModule({
   declarations: [
@@ -43,7 +48,8 @@ const appRoutes: Routes = [
     EntityRecComponent,
     ImageRecComponent,
     ContactComponent,
-    RegisterComponent
+    RegisterComponent,
+    ApikeyComponent
   ],
   imports: [
     BrowserModule,
